@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+  <Transactions>
+    <Transaction>2017/03/13 22:53:50.164,D:\Atila\TCC\Desenvolvimento\Aplicativos\Pessoas\Pessoas.dproj=D:\Atila\TCC\Desenvolvimento\Aplicativos\Clientes\Clientes.dproj</Transaction>
+    <Transaction>2017/03/13 22:54:08.259,D:\Atila\TCC\Desenvolvimento\Aplicativos\Pessoas\uPessoa.dfm=D:\Atila\TCC\Desenvolvimento\Aplicativos\Clientes\uCliente.dfm</Transaction>
+    <Transaction>2017/03/13 22:54:08.259,D:\Atila\TCC\Desenvolvimento\Aplicativos\Pessoas\uPessoa.pas=D:\Atila\TCC\Desenvolvimento\Aplicativos\Clientes\uCliente.pas</Transaction>
+  </Transactions>
+</BorlandProject>

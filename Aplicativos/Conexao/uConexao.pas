@@ -1,0 +1,72 @@
+unit uConexao;
+
+interface
+
+uses
+  System.Classes,
+  System.SysUtils,
+  Vcl.Forms,
+  FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  FireDAC.Stan.Error, FireDAC.UI.Intf, FireDAC.Phys.Intf, FireDAC.Stan.Def,
+  FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys, FireDAC.Phys.PG,
+  FireDAC.Phys.PGDef, FireDAC.VCLUI.Wait, Vcl.StdCtrls, Vcl.Buttons, Data.DB,
+  FireDAC.Comp.Client, FireDAC.Stan.Param, FireDAC.DatS, FireDAC.DApt.Intf,
+  FireDAC.DApt, FireDAC.Comp.DataSet;
+
+type
+  TConexaoSOS = class(TFDConnection)
+    DriverConexao: TFDPhysPgDriverLink;
+    Query: TFDQuery;
+
+  private
+    procedure ExecutaConsulta;
+    { Private declarations }
+  public
+    { Public declarations }
+    constructor Create(AOwner: TComponent); override;
+    destructor Destroy; override;
+    procedure OpenSQL(aSQL: string);
+  end;
+
+implementation
+
+{ TConexaoSOS }
+
+constructor TConexaoSOS.Create(AOwner: TComponent);
+begin
+  inherited;
+  DriverConexao := TFDPhysPgDriverLink.Create(Self);
+  Query := TFDQuery.Create(Self);
+  DriverConexao.VendorHome := ExtractFilePath(Application.ExeName);
+  DriverConexao.VendorLib := 'libpq.dll';
+  DriverConexao.Release;
+  Params.Values['DriverID'] := 'PG';
+  Params.Values['database'] := 'sos';
+  Params.Values['user_name'] := 'postgres';
+  Params.Values['password'] := 'atiladani';
+  Params.Values['server'] := 'localhost';
+  Params.Values['port'] := '5432';
+  Connected := True;
+  Query.Connection := Self;
+end;
+
+destructor TConexaoSOS.Destroy;
+begin
+  DriverConexao.Free;
+  Query.Free;
+  inherited;
+end;
+
+procedure TConexaoSOS.ExecutaConsulta;
+begin
+
+end;
+
+procedure TConexaoSOS.OpenSQL(aSQL: string);
+begin
+  Query.Active := False;
+  Query.Open(aSQL);
+  Query.Active := True;
+end;
+
+end.

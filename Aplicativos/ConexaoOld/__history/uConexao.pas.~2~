@@ -1,0 +1,57 @@
+unit uConexao;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
+  System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  FireDAC.Stan.Error, FireDAC.UI.Intf, FireDAC.Phys.Intf, FireDAC.Stan.Def,
+  FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys, FireDAC.Phys.PG,
+  FireDAC.Phys.PGDef, FireDAC.VCLUI.Wait, Vcl.StdCtrls, Vcl.Buttons, Data.DB,
+  FireDAC.Comp.Client;
+
+type
+  TForm1 = class(TForm)
+    FDConnection: TFDConnection;
+    FDPhysPgDriverLink: TFDPhysPgDriverLink;
+    BitBtn1: TBitBtn;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+    function Conexao(aConnect: Boolean): Boolean;
+  end;
+
+var
+  Form1: TForm1;
+
+implementation
+
+{$R *.dfm}
+
+function TForm1.Conexao(aConnect: Boolean): Boolean;
+begin
+  if aConnect = True then
+  begin
+    FDPhysPgDriverLink.VendorHome := ExtractFilePath(Application.ExeName);
+    FDPhysPgDriverLink.VendorLib := 'libpq.dll';
+    FDPhysPgDriverLink.Release;
+    FDConnection.Connected := False;
+    FDConnection.Params.Values['database'] := 'sos';
+    FDConnection.Params.Values['user_name'] := 'postgres';
+    FDConnection.Params.Values['password'] := 'atiladani';
+    FDConnection.Params.Values['server'] := 'localhost';
+    FDConnection.Params.Values['port'] := '5432';
+    FDConnection.Connected := True;
+  end
+  else
+  begin
+    FDConnection.Connected := True;
+  end;
+
+  Result := FDConnection.Connected;
+
+end;
+
+end.

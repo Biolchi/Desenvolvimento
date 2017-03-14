@@ -1,0 +1,13 @@
+unit uConexao;
+
+interface
+
+
+type
+  TConexao = class(TFDConnection)
+
+
+  end;
+implementation
+
+end.
